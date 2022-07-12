@@ -21,7 +21,7 @@ func NewParser(repo Repository, logger logger.Logger) Service {
 func (p parserService) Parse(s string) []int {
 	output, err := p.repository.Parse(s)
 	if err != nil {
-		p.logger.Error(fmt.Errorf("Error while parsing string: %v", err))
+		p.logger.Error(fmt.Errorf("Error while parsing string: %v", s))
 		return nil
 	}
 
