@@ -22,7 +22,7 @@ func (p parserRepository) Parse(s string) (output []int, err error) {
 			for k := 0; k < len(rangeStrings); k++ {
 				number, err = strconv.Atoi(rangeStrings[k])
 				if err != nil {
-					panic(err)
+					return nil, err
 				}
 				rangeNumbers = append(rangeNumbers, number)
 			}
