@@ -6,28 +6,29 @@ import (
 )
 
 func Parse(s string) (output []int, err error) {
-	numbers := strings.Split(s, ";")
-	for i := 0; i < len(numbers); i++ {
-		number, err := strconv.Atoi(numbers[i])
-		if err != nil {
-			rangeStrings := strings.Split(numbers[i], "-")
-			rangeNumbers := make([]int, 0, 2)
-			for k := 0; k < len(rangeStrings); k++ {
-				number, err = strconv.Atoi(rangeStrings[k])
-				if err != nil {
-					return nil, err
-				}
-				rangeNumbers = append(rangeNumbers, number)
-			}
+	splitted := strings.Split(s, "-")
+	var digit int
+	for i := 0; i < len(splitted); i++ {
+		numbers := strings.Split(splitted[i], ";")
 
-			for j := rangeNumbers[0]; j <= rangeNumbers[1]; j++ {
-				output = append(output, j)
+		if i > 0 {
+			digit, err = strconv.Atoi(numbers[0])
+			if err != nil {
+				return nil, err
 			}
-
-			continue
+			for k := output[len(output)-1] + 1; k <= digit; k++ {
+				output = append(output, k)
+			}
+			numbers = numbers[1:]
 		}
 
-		output = append(output, number)
+		for j := 0; j < len(numbers); j++ {
+			digit, err = strconv.Atoi(numbers[j])
+			if err != nil {
+				return nil, err
+			}
+			output = append(output, digit)
+		}
 	}
 
 	return

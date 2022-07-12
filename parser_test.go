@@ -1,7 +1,10 @@
 package code_interview
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
+	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -64,4 +67,30 @@ func TestParseWithBadCases(t *testing.T) {
 		})
 	}
 
+}
+
+func TestUpdatedParse(t *testing.T) {
+	s := "1;4-7;8;9;10-13;1-3;22"
+	//s := "1;2;3;4;5"
+
+	output := make([]int, 0, len(s))
+	splitted := strings.Split(s, "-")
+	for i := 0; i < len(splitted); i++ {
+		numbers := strings.Split(splitted[i], ";")
+
+		if i > 0 {
+			digit, _ := strconv.Atoi(numbers[0])
+			for k := output[len(output)-1] + 1; k <= digit; k++ {
+				output = append(output, k)
+			}
+			numbers = numbers[1:]
+		}
+
+		for j := 0; j < len(numbers); j++ {
+			digit, _ := strconv.Atoi(numbers[j])
+			output = append(output, digit)
+		}
+	}
+
+	fmt.Println(output)
 }
