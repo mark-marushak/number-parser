@@ -1,4 +1,4 @@
-package repository
+package code_interview
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -28,10 +28,9 @@ func TestParseWithNormalData(t *testing.T) {
 		},
 	}
 
-	repository := parserRepository{}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			output, err := repository.Parse(test.data)
+			output, err := Parse(test.data)
 			if err != nil {
 				return
 			}
@@ -56,10 +55,9 @@ func TestParseWithBadCases(t *testing.T) {
 		},
 	}
 
-	repository := parserRepository{}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			_, err := repository.Parse(test.data)
+			_, err := Parse(test.data)
 			if err == nil {
 				t.Fail()
 			}

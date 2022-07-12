@@ -1,18 +1,11 @@
-package repository
+package code_interview
 
 import (
-	"github.com/mark-marushak/number-parser/parser"
 	"strconv"
 	"strings"
 )
 
-type parserRepository struct{}
-
-func NewParser() parser.Repository {
-	return &parserRepository{}
-}
-
-func (p parserRepository) Parse(s string) (output []int, err error) {
+func Parse(s string) (output []int, err error) {
 	numbers := strings.Split(s, ";")
 	for i := 0; i < len(numbers); i++ {
 		number, err := strconv.Atoi(numbers[i])
