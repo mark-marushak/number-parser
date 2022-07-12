@@ -31,6 +31,7 @@ func (s StandardLogger) Error(args ...interface{}) {
 func main() {
 	var input *string
 	input = flag.String("input", "1;4-7;9", "enter string with numbers by pattern '1;4-7;9' or '1;2;3;5;6'")
+	flag.Parse()
 
 	service := parser.NewParser(repository.NewParser(), &StandardLogger{})
 	fmt.Println(service.Parse(*input))
